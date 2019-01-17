@@ -15,6 +15,8 @@ import {
     Close as CloseIcon
 } from '@material-ui/icons';
 import DetailDialogStore from '../../stores/DetailDialog.store';
+import AlertConfirmDialog from '../AlertConfirmDialog'
+import Uploader from '../Uploader';
 import './index.css';
 
 export default class DetailDialog extends Component {
@@ -23,13 +25,17 @@ export default class DetailDialog extends Component {
         DetailDialogStore.subscribe(() => {
             this.setState({
                 open: DetailDialogStore.getState()._open,
-                isNew:DetailDialogStore.getState()._isNew
+                isNew: DetailDialogStore.getState()._isNew
             })
         })
     }
     state = {
         open: false,
-        isNew:true
+        isNew: true
+    }
+
+    showConfirmDialog = () => {
+        this.refs.acDialog.handleShow();
     }
 
     handleAbandon = () => {
@@ -48,7 +54,7 @@ export default class DetailDialog extends Component {
                 <AppBar color="primary" position="fixed">
                     <Toolbar>
                         <Typography variant="h6" color="inherit" className="detail_dialog_title" >
-                            {this.state.isNew?'New Blog':'Edit Blog'}
+                            {this.state.isNew ? 'New Blog' : 'Edit Blog'}
                         </Typography>
                         <Tooltip title="save and publish" disableFocusListener >
                             <IconButton color="inherit" aria-label="Save">
@@ -56,29 +62,32 @@ export default class DetailDialog extends Component {
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="abondon" disableFocusListener>
-                            <IconButton color="inherit" aria-label="Abandon" onClick={this.handleAbandon}>
+                            <IconButton color="inherit" aria-label="Abandon" onClick={this.showConfirmDialog}>
                                 <CloseIcon />
                             </IconButton>
                         </Tooltip>
                     </Toolbar>
                 </AppBar>
-                <Paper className="detail_dialog_paper" elevation={2}>
-                    <TextField 
+                <Paper className="detail_dialog_paper" elevation={1}>
+                    <TextField
                         label="Blog Title" margin="normal"
                         variant="outlined" fullWidth required
                         helperText="No more than 20 chinese characters or 40 letters"
                     />
-                    <TextField 
+                    <TextField
                         label="Content" margin="normal" rows="15" rowsMax="15"
                         variant="outlined" fullWidth multiline required
                     />
-                    <TextField 
+                    <TextField
                         label="Introduction Or Keywords" margin="normal"
                         variant="outlined" fullWidth required
                         helperText="Not more than 30 chinese characters or 60 letters"
                     />
+                    <Uploader btnText="Upload Cover Picture" />
                 </Paper>
-
+                <AlertConfirmDialog confirm ref="acDialog"
+                    title="Warning" content="Do you confirm to abandon without saving?"
+                    yesBtnText="Continue" onYesBtnClick={this.handleAbandon} />
             </Dialog>
         )
     }
