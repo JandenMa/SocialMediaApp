@@ -43,7 +43,7 @@ export default class AlertConfirmDialog extends Component {
                 {this.props.title && <DialogTitle id="dialog-title">{this.props.title}</DialogTitle>}
                 <DialogContent>
                     <DialogContentText id="dialog-description">
-                        &emsp;{this.props.content}
+                        {this.props.content}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
