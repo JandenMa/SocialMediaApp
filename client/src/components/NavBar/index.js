@@ -15,6 +15,7 @@ import {
 } from '@material-ui/icons';
 import DetailDialogStore from '../../stores/DetailDialog.store';
 import LoginStore from '../../stores/Login.store';
+import AlertConfirmDialog from '../AlertConfirmDialog'
 import './index.css'
 
 export default class NavBar extends Component {
@@ -25,7 +26,7 @@ export default class NavBar extends Component {
                 auth: LoginStore.getState()._auth,
                 anchorEl: null
             })
-            this.renderLoginBtn();
+            this.renderSigninBtn();
             this.renderAccountBtn();
         })
     }
@@ -44,23 +45,28 @@ export default class NavBar extends Component {
     };
 
     handleAddNewBlog = () => {
-        DetailDialogStore.dispatch({ type: 'add' });
+        DetailDialogStore.dispatch({ type: 'add', isNew: true });
     }
 
-    handleLogin = () => {
+    handleSignin = () => {
         LoginStore.dispatch({ type: 'login' });
     }
 
-    handleLogout = () => {
+    showConfirmDialog = () => {
+        this.setState({ anchorEl: null });
+        this.refs.acDialog.handleShow();
+    }
+
+    handleSignout = () => {
         LoginStore.dispatch({ type: 'logout' });
     }
 
-    renderLoginBtn = () => {
+    renderSigninBtn = () => {
         return (
             !this.state.auth && <Button color="inherit"
                 className="navbar_account"
-                onClick={this.handleLogin}
-            >Login</Button>
+                onClick={this.handleSignin}
+            >Sign In</Button>
         );
     }
 
@@ -89,8 +95,15 @@ export default class NavBar extends Component {
                         }}
                         open={Boolean(this.state.anchorEl)}
                         onClose={this.handleClose}>
-                        <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                        <MenuItem onClick={this.showConfirmDialog}>Sign Out</MenuItem>
                     </Menu>
+
+                    <AlertConfirmDialog ref="acDialog"
+                        onYesBtnClick={this.handleSignout}
+                        confirm
+                        title="Confirm your operation"
+                        content="Do you confirm to sign out?"
+                        yesBtnText="ok" />
 
                     <Tooltip title="Write a new blog"
                         aria-label="Write a new blog"
@@ -117,7 +130,7 @@ export default class NavBar extends Component {
                         <Typography variant="h6" color="inherit" noWrap>
                             Kofix Blog
                         </Typography>
-                        {this.renderLoginBtn()}
+                        {this.renderSigninBtn()}
                         {this.renderAccountBtn()}
                     </Toolbar>
                 </AppBar>
