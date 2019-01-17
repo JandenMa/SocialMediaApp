@@ -9,7 +9,7 @@ import {
     Slide
 } from '@material-ui/core'
 
-function Transition(props){
+function Transition(props) {
     return <Slide direction="up" {...props} />
 }
 
@@ -28,7 +28,7 @@ export default class AlertConfirmDialog extends Component {
 
     handleYes = () => {
         this.setState({ _open: false });
-        this.props.onYesBtnClick();
+        this.props.onYesBtnClick && this.props.onYesBtnClick();
     }
 
     render() {
@@ -48,13 +48,13 @@ export default class AlertConfirmDialog extends Component {
                 </DialogContent>
                 <DialogActions>
                     {
-                        this.props.confirm&&
+                        this.props.confirm &&
                         <Button variant="outlined" onClick={this.handleClose} color="secondary">
-                            {this.props.cancelBtnText||'Cancel'}
+                            {this.props.cancelBtnText || 'Cancel'}
                         </Button>
                     }
                     <Button variant="outlined" onClick={this.handleYes} color="primary" autoFocus>
-                        {this.props.yesBtnText||'Yes'}
+                        {this.props.yesBtnText || 'Yes'}
                     </Button>
                 </DialogActions>
             </Dialog>
