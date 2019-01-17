@@ -49,11 +49,11 @@ export default class AlertConfirmDialog extends Component {
                 <DialogActions>
                     {
                         this.props.confirm&&
-                        <Button onClick={this.handleClose} color="secondary">
+                        <Button variant="outlined" onClick={this.handleClose} color="secondary">
                             {this.props.cancelBtnText||'Cancel'}
                         </Button>
                     }
-                    <Button onClick={this.handleYes} color="primary" autoFocus>
+                    <Button variant="outlined" onClick={this.handleYes} color="primary" autoFocus>
                         {this.props.yesBtnText||'Yes'}
                     </Button>
                 </DialogActions>
