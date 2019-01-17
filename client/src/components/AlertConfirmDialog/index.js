@@ -5,8 +5,13 @@ import {
     DialogContent,
     DialogContentText,
     DialogActions,
-    Button
+    Button,
+    Slide
 } from '@material-ui/core'
+
+function Transition(props){
+    return <Slide direction="up" {...props} />
+}
 
 export default class AlertConfirmDialog extends Component {
     state = {
@@ -33,6 +38,7 @@ export default class AlertConfirmDialog extends Component {
                 onClose={this.handleClose}
                 aria-labelledby="dialog-title"
                 aria-describedby="dialog-description"
+                TransitionComponent={Transition}
             >
                 {this.props.title && <DialogTitle id="dialog-title">{this.props.title}</DialogTitle>}
                 <DialogContent>
@@ -41,7 +47,8 @@ export default class AlertConfirmDialog extends Component {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    {this.props.confirm&&
+                    {
+                        this.props.confirm&&
                         <Button onClick={this.handleClose} color="secondary">
                             {this.props.cancelBtnText||'Cancel'}
                         </Button>
