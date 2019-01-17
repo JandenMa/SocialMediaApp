@@ -1,11 +1,10 @@
 .blog_list{
     margin: 2rem auto;
-    padding: 3rem 4rem;
+    padding: 3rem 9rem;
 }
 
 .blog_list .blog_item{
     width: 100%;
-    height: 300px;
     border: solid #eee 1px;
 }
 
@@ -19,18 +18,22 @@
     overflow: hidden;
 }
 
-.blog_list .blog_item .blog_readmore{
+.blog_list .blog_item .blog_btn{
+    float: right;
+}
+
+.blog_list .blog_item .blog_btn .blog_readmore{
     font-weight: bold
 }
 
 @media only screen and (max-width:960px){
     .blog_list{
-        padding: 1.5rem 2rem;
+        padding: 1.5rem 6rem;
     }
 }
 
 @media only screen and (max-width:600px){
     .blog_list{
-        padding: 1rem 1.5rem;
+        padding: 1rem 2rem;
     }
 }

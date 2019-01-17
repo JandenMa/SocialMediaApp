@@ -17,7 +17,7 @@ export default class BlogList extends Component {
         return (
             <div className="blog_list">
                 <Grid
-                    spacing={32}
+                    spacing={40}
                     container
                     direction="row"
                     justify="flex-start"
@@ -39,10 +39,14 @@ export default class BlogList extends Component {
                                         Intuitive brightness and color temperature adjustment
                 Works with the Google Assistant
                                     </Typography>
+                                    <hr />
+                                    <Typography component="p">
+                                        2019-01-12 12:10:34
+                                    </Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="secondary" className="blog_readmore">
+                            <CardActions className="blog_btn">
+                                <Button size="small" color="secondary">
                                     Read More &ensp;>
                                 </Button>
                             </CardActions>
@@ -62,11 +66,15 @@ export default class BlogList extends Component {
                                     <Typography component="p">
                                         4K Ultra HD Streaming Media Player
                 Google Assistant | Chromecast built-in
-                                     </Typography>
+                                    </Typography>
+                                    <hr />
+                                    <Typography component="p">
+                                        2019-01-10 14:19:43
+                                    </Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="secondary" className="blog_readmore">
+                            <CardActions className="blog_btn">
+                                <Button size="small" color="secondary">
                                     Read More &ensp;>
                                 </Button>
                             </CardActions>
@@ -86,11 +94,15 @@ export default class BlogList extends Component {
                                     <Typography component="p">
                                         Ultra-short throw distance
                 A massive screen for your home
-                                     </Typography>
+                                    </Typography>
+                                    <hr />
+                                    <Typography component="p">
+                                        2019-01-09 08:20:15 
+                                    </Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="secondary" className="blog_readmore">
+                            <CardActions className="blog_btn">
+                                <Button size="small" color="secondary">
                                     Read More &ensp;>
                                 </Button>
                             </CardActions>
@@ -111,10 +123,14 @@ export default class BlogList extends Component {
                                         Intuitive and easy-to-learn,
                 18.6 miles long-range battery life
                                      </Typography>
+                                    <hr />
+                                    <Typography component="p">
+                                        2019-01-08 09:31:04 
+                                    </Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="secondary" className="blog_readmore">
+                            <CardActions className="blog_btn">
+                                <Button size="small" color="secondary">
                                     Read More &ensp;>
                                 </Button>
                             </CardActions>
@@ -130,15 +146,19 @@ export default class BlogList extends Component {
                                 <CardContent>
                                     <Typography gutterBottom variant="h6" className="blog_item_title">
                                         Mi LED Desk Lamp
-                        </Typography>
+                                    </Typography>
                                     <Typography component="p">
                                         Intuitive brightness and color temperature adjustment
                 Works with the Google Assistant
-                        </Typography>
+                                    </Typography>
+                                    <hr />
+                                    <Typography component="p">
+                                        2019-01-06 16:29:03 
+                                    </Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="secondary" className="blog_readmore">
+                            <CardActions className="blog_btn">
+                                <Button size="small" color="secondary">
                                     Read More &ensp;>
                                 </Button>
                             </CardActions>
@@ -159,10 +179,14 @@ export default class BlogList extends Component {
                                         4K Ultra HD Streaming Media Player
                 Google Assistant | Chromecast built-in
                                      </Typography>
+                                    <hr />
+                                    <Typography component="p">
+                                        2019-01-05 10:54:29 
+                                    </Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="secondary" className="blog_readmore">
+                            <CardActions className="blog_btn">
+                                <Button size="small" color="secondary">
                                     Read More &ensp;>
                                 </Button>
                             </CardActions>
@@ -183,10 +207,14 @@ export default class BlogList extends Component {
                                         Ultra-short throw distance
                 A massive screen for your home
                                      </Typography>
+                                    <hr />
+                                    <Typography component="p">
+                                        2019-01-03 23:47:12 
+                                    </Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="secondary" className="blog_readmore">
+                            <CardActions className="blog_btn">
+                                <Button size="small" color="secondary">
                                     Read More &ensp;>
                                 </Button>
                             </CardActions>
@@ -207,10 +235,14 @@ export default class BlogList extends Component {
                                         Intuitive and easy-to-learn,
                 18.6 miles long-range battery life
                                      </Typography>
+                                    <hr />
+                                    <Typography component="p">
+                                        2019-01-01 00:15:22 
+                                    </Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="secondary" className="blog_readmore">
+                            <CardActions className="blog_btn">
+                                <Button size="small" color="secondary">
                                     Read More &ensp;>
                                 </Button>
                             </CardActions>
