@@ -23,13 +23,13 @@ export default class DetailDialog extends Component {
         DetailDialogStore.subscribe(() => {
             this.setState({
                 open: DetailDialogStore.getState()._open,
-                title:DetailDialogStore.getState()._title
+                isNew:DetailDialogStore.getState()._isNew
             })
         })
     }
     state = {
         open: false,
-        title:'New Blog'
+        isNew:true
     }
 
     handleAbandon = () => {
@@ -48,7 +48,7 @@ export default class DetailDialog extends Component {
                 <AppBar color="primary" position="fixed">
                     <Toolbar>
                         <Typography variant="h6" color="inherit" className="detail_dialog_title" >
-                            {this.state.title}
+                            {this.state.isNew?'New Blog':'Edit Blog'}
                         </Typography>
                         <Tooltip title="save and publish" disableFocusListener >
                             <IconButton color="inherit" aria-label="Save">
