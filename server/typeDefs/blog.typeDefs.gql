@@ -1,0 +1,34 @@
+type Blog{
+    id: ID!,
+    title: String,
+    introduction: String,
+    createTime: Int,
+    lastUpdateTime: Int
+}
+
+input InputBlog{
+    id: String,
+    title: String,
+    introduction: String
+}
+
+input SearchBlog{
+    id: Json,
+    title: Json,
+    introduction: Json
+}
+
+type Query {
+    getBlogs: [Blog],
+    getBlogById(id:String): Blog
+}
+
+type Mutation {
+    createBlog(blog:InputBlog): Blog,
+    updateBlog(blog:InputBlog): Blog,
+    deleteBlog(id:String): [Blog]
+}
+
+scalar Date
+
+scalar Json
