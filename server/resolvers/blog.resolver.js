@@ -1,73 +1,36 @@
+/**
+ * This is the Blog Resolver for GraphQL
+ */
+
 const Scalar = require('../scalars');
 const controller = require('../controllers/blog.controller');
 
-const data = [{
-    id: 1,
-    title: 'Mi Box',
-    introduction: 'mi.com',
-},
-{
-    id: 2,
-    title: 'Mi Light',
-    introduction: 'mi.com',
-},
-{
-    id: 3,
-    title: 'Mi Phone',
-    introduction: 'mi.com',
-},
-{
-    id: 4,
-    title: 'Mi Band',
-    introduction: 'mi.com',
-},
-{
-    id: 5,
-    title: 'Mi Bike',
-    introduction: 'mi.com',
-}
-];
-
 const Query = {
-    getBlogs: () => {
-        return data
+    getBlogs: async () => {
+        return await controller.getBlogList();
     },
-    getBlogById: (v, args) => {
-        let temp = null;
-        data.forEach(blog => {
-            if (blog.id == args.id) {
-                temp = blog;
-            }
-        });
-        return temp;
+    getBlogById: async (v, args) => {
+        return await controller.getBlogById(args.id);
     }
 }
 
 const Mutation = {
-    createBlog: (v, args) => {
-        data.push(args.blog);
-        return data[data.length - 1];
+    createBlog: async (v, args) => {
+        let { blog } = args;
+        blog.id = `BL${Date.parse(new Date())}${Math.round(Math.random() * 5000)}`;
+        return await controller.addBlog(blog);
     },
-    updateBlog: (v, args) => {
-        let temp = null;
-        data.forEach((blog, index) => { 
-            if (blog.id == args.blog.id) {
-                data.splice(index, 1, args.blog)
-                temp = data[index];
-            }
-        });
-        return temp;
+    updateBlog: async (v, args) => {
+        let { blog } = args;
+        blog.lastUpdateTime = new Date();
+        console.log(blog)
+        return await controller.updateBlog(blog);
     },
-    deleteBlog: (v, args) => {
-        data.forEach((blog, index) => {
-            if (blog.id == args.id) {
-                data.splice(index, 1)
-            }
-        });
-        return data;
+    deleteBlog: async (v, args) => {
+        return await controller.deleteBlog(args.id);
     }
 }
 
-const { Date, Json } = Scalar;
+const { DateScalar, JsonScalar } = Scalar;
 
-module.exports = { Query, Mutation, Date, Json };
+module.exports = { Query, Mutation, DateScalar, JsonScalar };

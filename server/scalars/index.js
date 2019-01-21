@@ -2,8 +2,8 @@ const JsonScalar = require('./JsonScalar');
 const DateScalar = require('./DateScalar');
 
 const Scalar = {
-    Json: JsonScalar,
-    Date: DateScalar
+    JsonScalar,
+    DateScalar
 }
 
 module.exports = Scalar;

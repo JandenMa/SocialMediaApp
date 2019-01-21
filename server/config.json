@@ -1,0 +1,22 @@
+{
+    "mongodb":{
+        "address":"ds031108.mlab.com",
+        "port":"31108",
+        "username":"root",
+        "password":"sa123456",
+        "db":"kofix-blog"
+    },
+    "Cors": {
+        "Headers": [
+            "Access-Control-Allow-Origin",
+            "Access-Control-Allow-Headers",
+            "Origin, X-Requested-With, Content-Type",
+            "CORELATION_ID"
+        ],
+        "Origin": [
+            "http://localhost:3000",
+            "http://localhost:8088"
+        ],
+        "Methods":["GET","POST","OPTIONS","PUT"]
+    }
+}

@@ -1,21 +1,19 @@
+# This is the Blog typeDef for GraphQL
+
 type Blog{
     id: ID!,
     title: String,
+    content:String,
     introduction: String,
-    createTime: Int,
-    lastUpdateTime: Int
+    createTime: String,
+    lastUpdateTime: String
 }
 
 input InputBlog{
     id: String,
     title: String,
-    introduction: String
-}
-
-input SearchBlog{
-    id: Json,
-    title: Json,
-    introduction: Json
+    introduction: String,
+    content:String
 }
 
 type Query {
@@ -26,9 +24,9 @@ type Query {
 type Mutation {
     createBlog(blog:InputBlog): Blog,
     updateBlog(blog:InputBlog): Blog,
-    deleteBlog(id:String): [Blog]
+    deleteBlog(id:String): Blog
 }
 
-scalar Date
+scalar DateScalar
 
-scalar Json
+scalar JsonScalar
