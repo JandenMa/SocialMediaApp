@@ -3,6 +3,7 @@
  */
 
 const Scalar = require('../scalars');
+const moment = require('moment');
 const controller = require('../controllers/blog.controller');
 
 const Query = {
@@ -17,12 +18,12 @@ const Query = {
 const Mutation = {
     createBlog: async (v, args) => {
         let { blog } = args;
-        blog.id = `BL${Date.parse(new Date())}${Math.round(Math.random() * 5000)}`;
+        blog.id = `BL${moment().unix()}${Math.round(Math.random() * 5000)}`;
         return await controller.addBlog(blog);
     },
     updateBlog: async (v, args) => {
         let { blog } = args;
-        blog.lastUpdateTime = new Date();
+        blog.lastUpdateTime = moment().unix();
         console.log(blog)
         return await controller.updateBlog(blog);
     },

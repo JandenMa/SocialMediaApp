@@ -17,6 +17,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "graphql": "^14.1.1",
+    "moment": "^2.23.0",
     "mongoose": "^5.4.4",
     "require-text": "0.0.1"
   },
