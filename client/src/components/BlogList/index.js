@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Query } from "react-apollo";
+import gql from 'graphql-tag';
+import moment from 'moment';
 import {
     Card,
     CardActionArea,
@@ -12,6 +15,15 @@ import {
 } from '@material-ui/core'
 import './index.css';
 
+const GQL = {
+    BlogList: gql`
+    {
+        getBlogs{
+            id,title,content,introduction,lastUpdateTime
+        }
+    }`
+}
+
 export default class BlogList extends Component {
     render() {
         return (
@@ -22,232 +34,47 @@ export default class BlogList extends Component {
                     direction="row"
                     justify="flex-start"
                     wrap="wrap">
-                    <Grid md={4} sm={6} xs={12} item>
-                        <Card className="blog_item">
-                            <CardActionArea>
-                                <CardMedia className="blog_item_media"
-                                    image="https://i01.appmifile.com/webfile/globalimg/us/USBanner/desklampnew.jpg"
-                                    title="Mi LED Desk Lamp"
-                                />
-                                <CardContent>
-                                    <Tooltip title="Mi LED Desk Lamp">
-                                        <Typography gutterBottom variant="h6" className="blog_item_title">
-                                            Mi LED Desk Lamp
-                                    </Typography>
-                                    </Tooltip>
-                                    <Typography component="p">
-                                        Intuitive brightness and color temperature adjustment
-                Works with the Google Assistant
-                                    </Typography>
-                                    <hr />
-                                    <Typography component="p">
-                                        2019-01-12 12:10:34
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions className="blog_btn">
-                                <Button size="small" color="secondary">
-                                    Read More &ensp;>
+
+                    <Query query={GQL.BlogList}>
+                        {({ loading, error, data }) => {
+                            if (loading) return <p>Loading...</p>;
+                            if (error) return <p>Error :{error}</p>;
+
+                            return data.getBlogs.map(({
+                                id, title, content, introduction, lastUpdateTime
+                            }) => (
+                                    <Grid md={4} sm={6} xs={12} item key={id}>
+                                        <Card className="blog_item">
+                                            <CardActionArea>
+                                                <CardMedia className="blog_item_media"
+                                                    image="https://i01.appmifile.com/webfile/globalimg/us/USBanner/desklampnew.jpg"
+                                                    title="Mi LED Desk Lamp"
+                                                />
+                                                <CardContent>
+                                                    <Tooltip title="Mi LED Desk Lamp">
+                                                        <Typography gutterBottom variant="h6" className="blog_item_title">
+                                                            {title}
+                                                        </Typography>
+                                                    </Tooltip>
+                                                    <Typography component="p">
+                                                        {introduction}
+                                                    </Typography>
+                                                    <hr />
+                                                    <Typography component="p">
+                                                        {moment.unix(lastUpdateTime).format('YYYY-MM-DD HH:mm:ss')}
+                                                    </Typography>
+                                                </CardContent>
+                                            </CardActionArea>
+                                            <CardActions className="blog_btn">
+                                                <Button size="small" color="secondary">
+                                                    Read More &ensp;>
                                 </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    <Grid md={4} sm={6} xs={12} item>
-                        <Card className="blog_item">
-                            <CardActionArea>
-                                <CardMedia className="blog_item_media"
-                                    image="https://i01.appmifile.com/webfile/globalimg/us/USBanner/Mi-box-s.jpg"
-                                    title="Mi Box S"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" className="blog_item_title">
-                                        Mi Box S
-                                     </Typography>
-                                    <Typography component="p">
-                                        4K Ultra HD Streaming Media Player
-                Google Assistant | Chromecast built-in
-                                    </Typography>
-                                    <hr />
-                                    <Typography component="p">
-                                        2019-01-10 14:19:43
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions className="blog_btn">
-                                <Button size="small" color="secondary">
-                                    Read More &ensp;>
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    <Grid md={4} sm={6} xs={12} item>
-                        <Card className="blog_item">
-                            <CardActionArea>
-                                <CardMedia className="blog_item_media"
-                                    image="https://i01.appmifile.com/webfile/globalimg/us/USBanner/lazerprojectnew.jpg"
-                                    title="Mi Laser Projector 150"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" className="blog_item_title">
-                                        Mi Laser Projector 150
-                                     </Typography>
-                                    <Typography component="p">
-                                        Ultra-short throw distance
-                A massive screen for your home
-                                    </Typography>
-                                    <hr />
-                                    <Typography component="p">
-                                        2019-01-09 08:20:15 
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions className="blog_btn">
-                                <Button size="small" color="secondary">
-                                    Read More &ensp;>
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    <Grid md={4} sm={6} xs={12} item>
-                        <Card className="blog_item">
-                            <CardActionArea>
-                                <CardMedia className="blog_item_media"
-                                    image="https://i01.appmifile.com/webfile/globalimg/us/USBanner/Scooter-banner.jpg"
-                                    title="Mi Electric Scooter"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" className="blog_item_title">
-                                        Mi Electric Scooter
-                                     </Typography>
-                                    <Typography component="p">
-                                        Intuitive and easy-to-learn,
-                18.6 miles long-range battery life
-                                     </Typography>
-                                    <hr />
-                                    <Typography component="p">
-                                        2019-01-08 09:31:04 
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions className="blog_btn">
-                                <Button size="small" color="secondary">
-                                    Read More &ensp;>
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    <Grid md={4} sm={6} xs={12} item>
-                        <Card className="blog_item">
-                            <CardActionArea>
-                                <CardMedia className="blog_item_media"
-                                    image="https://i01.appmifile.com/webfile/globalimg/us/USBanner/desklampnew.jpg"
-                                    title="Mi LED Desk Lamp"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" className="blog_item_title">
-                                        Mi LED Desk Lamp
-                                    </Typography>
-                                    <Typography component="p">
-                                        Intuitive brightness and color temperature adjustment
-                Works with the Google Assistant
-                                    </Typography>
-                                    <hr />
-                                    <Typography component="p">
-                                        2019-01-06 16:29:03 
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions className="blog_btn">
-                                <Button size="small" color="secondary">
-                                    Read More &ensp;>
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    <Grid md={4} sm={6} xs={12} item>
-                        <Card className="blog_item">
-                            <CardActionArea>
-                                <CardMedia className="blog_item_media"
-                                    image="https://i01.appmifile.com/webfile/globalimg/us/USBanner/Mi-box-s.jpg"
-                                    title="Mi Box S"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" className="blog_item_title">
-                                        Mi Box S
-                                     </Typography>
-                                    <Typography component="p">
-                                        4K Ultra HD Streaming Media Player
-                Google Assistant | Chromecast built-in
-                                     </Typography>
-                                    <hr />
-                                    <Typography component="p">
-                                        2019-01-05 10:54:29 
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions className="blog_btn">
-                                <Button size="small" color="secondary">
-                                    Read More &ensp;>
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    <Grid md={4} sm={6} xs={12} item>
-                        <Card className="blog_item">
-                            <CardActionArea>
-                                <CardMedia className="blog_item_media"
-                                    image="https://i01.appmifile.com/webfile/globalimg/us/USBanner/lazerprojectnew.jpg"
-                                    title="Mi Laser Projector 150"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" className="blog_item_title">
-                                        Mi Laser Projector 150
-                                     </Typography>
-                                    <Typography component="p">
-                                        Ultra-short throw distance
-                A massive screen for your home
-                                     </Typography>
-                                    <hr />
-                                    <Typography component="p">
-                                        2019-01-03 23:47:12 
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions className="blog_btn">
-                                <Button size="small" color="secondary">
-                                    Read More &ensp;>
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    <Grid md={4} sm={6} xs={12} item>
-                        <Card className="blog_item">
-                            <CardActionArea>
-                                <CardMedia className="blog_item_media"
-                                    image="https://i01.appmifile.com/webfile/globalimg/us/USBanner/Scooter-banner.jpg"
-                                    title="Mi Electric Scooter"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" className="blog_item_title">
-                                        Mi Electric Scooter
-                                     </Typography>
-                                    <Typography component="p">
-                                        Intuitive and easy-to-learn,
-                18.6 miles long-range battery life
-                                     </Typography>
-                                    <hr />
-                                    <Typography component="p">
-                                        2019-01-01 00:15:22 
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions className="blog_btn">
-                                <Button size="small" color="secondary">
-                                    Read More &ensp;>
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
+                                            </CardActions>
+                                        </Card>
+                                    </Grid>
+                                ));
+                        }}
+                    </Query>
                 </Grid>
             </div>
         )
