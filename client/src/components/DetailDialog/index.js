@@ -55,7 +55,6 @@ export default class DetailDialog extends Component {
                 this.setState({
                     snackbar_open: false,
                     canAbandon: true,
-                    open: false,
                     id: props.data.saveBlog.id
                 });
             }, 3000)
@@ -198,7 +197,7 @@ export default class DetailDialog extends Component {
                                 <SaveIcon />
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title="abondon" disableFocusListener>
+                        <Tooltip title="close" disableFocusListener>
                             <IconButton color="inherit" aria-label="Abandon" onClick={this.beforeAbandon}>
                                 <CloseIcon />
                             </IconButton>
