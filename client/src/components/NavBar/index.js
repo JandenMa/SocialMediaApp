@@ -45,7 +45,7 @@ export default class NavBar extends Component {
     };
 
     handleAddNewBlog = () => {
-        DetailDialogStore.dispatch({ type: 'add', isNew: true });
+        DetailDialogStore.dispatch({ type: 'add' });
     }
 
     handleSignin = () => {
@@ -95,6 +95,7 @@ export default class NavBar extends Component {
                         }}
                         open={Boolean(this.state.anchorEl)}
                         onClose={this.handleClose}>
+                        <MenuItem>My Blogs</MenuItem>
                         <MenuItem onClick={this.showConfirmDialog}>Sign Out</MenuItem>
                     </Menu>
 

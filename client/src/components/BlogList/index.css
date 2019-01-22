@@ -18,6 +18,10 @@
     overflow: hidden;
 }
 
+.blog_list .blog_item .blog_item_time{
+    color:#8c8c8c;
+}
+
 .blog_list .blog_item .blog_btn{
     float: right;
 }

@@ -3,10 +3,10 @@ import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import NavBar from './components/NavBar';
 import BlogList from './components/BlogList';
-import DetailDialog from './components/DetailDialog';
+import { BlogMutation } from './components/BlogMutation';
 
 const client = new ApolloClient({
-    uri: 'http://localhost:8088/blog/graphql'
+    uri: 'http://localhost:8088/blog'
 })
 
 export default class App extends Component {
@@ -16,7 +16,7 @@ export default class App extends Component {
                 <div>
                     <NavBar />
                     <BlogList />
-                    <DetailDialog />
+                    <BlogMutation />
                 </div>
             </ApolloProvider>
         )

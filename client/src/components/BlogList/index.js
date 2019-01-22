@@ -19,7 +19,7 @@ const GQL = {
     BlogList: gql`
     {
         getBlogs{
-            id,title,content,introduction,lastUpdateTime
+            id,title,introduction,lastUpdateTime
         }
     }`
 }
@@ -41,7 +41,7 @@ export default class BlogList extends Component {
                             if (error) return <p>Error :{error}</p>;
 
                             return data.getBlogs.map(({
-                                id, title, content, introduction, lastUpdateTime
+                                id, title, introduction, lastUpdateTime
                             }) => (
                                     <Grid md={4} sm={6} xs={12} item key={id}>
                                         <Card className="blog_item">
@@ -51,7 +51,7 @@ export default class BlogList extends Component {
                                                     title="Mi LED Desk Lamp"
                                                 />
                                                 <CardContent>
-                                                    <Tooltip title="Mi LED Desk Lamp">
+                                                    <Tooltip title={title}>
                                                         <Typography gutterBottom variant="h6" className="blog_item_title">
                                                             {title}
                                                         </Typography>
@@ -60,15 +60,15 @@ export default class BlogList extends Component {
                                                         {introduction}
                                                     </Typography>
                                                     <hr />
-                                                    <Typography component="p">
-                                                        {moment.unix(lastUpdateTime).format('YYYY-MM-DD HH:mm:ss')}
+                                                    <Typography component="p" className="blog_item_time">
+                                                        Updated at&emsp;&emsp;{moment.unix(lastUpdateTime).format('YYYY-MM-DD HH:mm:ss')}
                                                     </Typography>
                                                 </CardContent>
                                             </CardActionArea>
                                             <CardActions className="blog_btn">
                                                 <Button size="small" color="secondary">
                                                     Read More &ensp;>
-                                </Button>
+                                                </Button>
                                             </CardActions>
                                         </Card>
                                     </Grid>
