@@ -16,16 +16,14 @@ const Query = {
 }
 
 const Mutation = {
-    createBlog: async (v, args) => {
+    saveBlog: async (v, args) => {
         let { blog } = args;
-        blog.id = `BL${moment().unix()}${Math.round(Math.random() * 5000)}`;
-        return await controller.addBlog(blog);
-    },
-    updateBlog: async (v, args) => {
-        let { blog } = args;
+        if (!blog.id) {
+            blog.id = `BL${moment().unix()}${Math.round(Math.random() * 5000)}`;
+            blog.createTime = moment().unix();
+        }
         blog.lastUpdateTime = moment().unix();
-        console.log(blog)
-        return await controller.updateBlog(blog);
+        return await controller.saveBlog(blog);
     },
     deleteBlog: async (v, args) => {
         return await controller.deleteBlog(args.id);

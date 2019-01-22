@@ -22,8 +22,7 @@ type Query {
 }
 
 type Mutation {
-    createBlog(blog:InputBlog): Blog,
-    updateBlog(blog:InputBlog): Blog,
+    saveBlog(blog:InputBlog): Blog,
     deleteBlog(id:String): Blog
 }
 

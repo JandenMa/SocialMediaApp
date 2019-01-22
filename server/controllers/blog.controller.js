@@ -22,19 +22,9 @@ const getBlogById = (id) => {
     })
 }
 
-const addBlog = (blog) => {
+const saveBlog = (blog) => {
     return new Promise((resolve) => {
-        let obj = new model(blog);
-        obj.save().then(data => resolve(data)).catch(err => {
-            console.log(err);
-            resolve(null);
-        })
-    })
-}
-
-const updateBlog = (blog) => {
-    return new Promise((resolve) => {
-        model.findOneAndUpdate({ id: blog.id }, { $set: blog }, { new: true })
+        model.findOneAndUpdate({ id: blog.id }, { $set: blog }, { new: true,upsert:true })
             .then((data) => resolve(data)).catch(err => {
                 console.log(err);
                 resolve(null);
@@ -52,7 +42,7 @@ const deleteBlog = (id) => {
 }
 
 const controller = {
-    getBlogList, getBlogById, addBlog, updateBlog, deleteBlog
+    getBlogList, getBlogById, saveBlog, deleteBlog
 }
 
 module.exports = controller;
