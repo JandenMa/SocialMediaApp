@@ -57,7 +57,8 @@ export default class DetailDialog extends Component {
                     canAbandon: true,
                     id: props.data.saveBlog.id
                 });
-            }, 3000)
+                this.handleAbandon();
+            }, 2000)
         }
     }
 
