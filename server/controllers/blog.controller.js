@@ -15,7 +15,7 @@ const getBlogList = () => {
 
 const getBlogById = (id) => {
     return new Promise((resolve) => {
-        model.findById(id).then(data => resolve(data)).catch(err => {
+        model.findOne({id}).then(data => resolve(data)).catch(err => {
             console.log(err);
             resolve(null);
         })
