@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import gql from 'graphql-tag';
 import {
     Dialog,
     AppBar,
@@ -15,10 +16,20 @@ import {
     SaveSharp as SaveIcon,
     Close as CloseIcon
 } from '@material-ui/icons';
+import Client from '../ApolloClient';
 import DetailDialogStore from '../../stores/DetailDialog.store';
 import AlertConfirmDialog from '../AlertConfirmDialog'
 import Uploader from '../Uploader';
 import './index.css';
+
+const GQL = {
+    GET_BLOG_BY_ID: gql`
+    query GetBlogById($id:String!){
+        getBlogById(id:$id){
+            id,title,introduction,content
+        }
+    }`
+}
 
 export default class DetailDialog extends Component {
     constructor(...args) {
@@ -28,6 +39,9 @@ export default class DetailDialog extends Component {
                 open: DetailDialogStore.getState()._open,
                 id: DetailDialogStore.getState()._id,
             })
+            if (DetailDialogStore.getState()._id) {
+                this.handleQueryById(DetailDialogStore.getState()._id);
+            }
         })
     }
 
@@ -46,6 +60,16 @@ export default class DetailDialog extends Component {
             onYesBtnClick: null,
             confirm: true
         }
+    }
+
+    handleQueryById = (id) => {
+        Client.query({
+            query: GQL.GET_BLOG_BY_ID,
+            variables: { id }
+        }).then(({ data }) => {
+            const { id, title, content, introduction } = data.getBlogById;
+            this.setState({ id, content, title, introduction });
+        }).catch(err => { throw err });
     }
 
     componentWillReceiveProps = (props) => {
@@ -207,18 +231,18 @@ export default class DetailDialog extends Component {
                 </AppBar>
                 <Paper className="detail_dialog_paper" elevation={1}>
                     <TextField
-                        onInput={this.handleTitleInput}
+                        onInput={this.handleTitleInput} value={this.state.title}
                         label="Blog Title" margin="normal"
                         variant="outlined" fullWidth required
                         helperText="No more than 20 chinese characters or 40 letters"
                     />
                     <TextField
-                        onInput={this.handleContentInput}
+                        onInput={this.handleContentInput} value={this.state.content}
                         label="Content" margin="normal" rows="15" rowsMax="15"
                         variant="outlined" fullWidth multiline required
                     />
                     <TextField
-                        onInput={this.handleIntroInput}
+                        onInput={this.handleIntroInput} value={this.state.introduction}
                         label="Introduction Or Keywords" margin="normal"
                         variant="outlined" fullWidth required
                         helperText="Not more than 30 chinese characters or 60 letters"

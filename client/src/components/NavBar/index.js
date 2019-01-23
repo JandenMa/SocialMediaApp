@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
     AppBar,
     Toolbar,
@@ -57,6 +58,10 @@ export default class NavBar extends Component {
         this.refs.acDialog.handleShow();
     }
 
+    jumpToMyBlogs = () => {
+        window.location.href = '/myblogs';
+    }
+
     handleSignout = () => {
         LoginStore.dispatch({ type: 'logout' });
     }
@@ -74,6 +79,16 @@ export default class NavBar extends Component {
         if (this.state.auth) {
             return (
                 <div className="navbar_account">
+                    <Button>
+                        <Link to="/">
+                            <Typography>Home</Typography>
+                        </Link>
+                    </Button>
+                    <Button>
+                        <Link to="/myblogs">
+                            <Typography>My Blogs</Typography>
+                        </Link>
+                    </Button>
                     <Tooltip title="Account Setting"
                         aria-label="Account Setting"
                         disableFocusListener>
@@ -95,7 +110,6 @@ export default class NavBar extends Component {
                         }}
                         open={Boolean(this.state.anchorEl)}
                         onClose={this.handleClose}>
-                        <MenuItem>My Blogs</MenuItem>
                         <MenuItem onClick={this.showConfirmDialog}>Sign Out</MenuItem>
                     </Menu>
 

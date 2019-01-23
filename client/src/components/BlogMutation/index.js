@@ -7,7 +7,7 @@ const GQL = {
     SAVE_BLOG: gql`
         mutation SaveBlog($blog:InputBlog){
             saveBlog(blog:$blog){
-                id,title,introduction,lastUpdateTime
+                id,title,introduction,createTime,lastUpdateTime,content
             }
         }`,
     BLOG_LIST: gql`

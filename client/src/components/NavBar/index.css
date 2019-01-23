@@ -2,6 +2,10 @@
     padding: 1.2rem;
 }
 
+.navbar a{
+    text-decoration: none;
+}
+
 .navbar .navbar_account{
     position: absolute;
     right: 1rem;

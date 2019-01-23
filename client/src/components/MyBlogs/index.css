@@ -1,0 +1,9 @@
+.myblog-box{
+    margin: 4rem auto;
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+.myblog-box .myblog-table{
+    border: solid 1px #ccc;
+}

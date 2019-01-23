@@ -13,7 +13,7 @@ const store = createStore((state = {
             state._auth = false;
             return state;
         default:
-            break;
+            return state;
     }
 })
 
